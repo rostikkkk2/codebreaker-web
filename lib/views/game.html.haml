@@ -1,40 +1,33 @@
 !!!
 %html.mdl-js{:lang => "en"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
-    %link{:href => "assets/favicon.ico", :rel => "icon"}/
-    %link{:href => "node_modules/bootstrap/dist/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "assets/css/styles.css", :rel => "stylesheet"}/
-    %script{:src => "node_modules/jquery/dist/jquery.min.js"}
-    %script{:src => "node_modules/bootstrap/dist/js/bootstrap.min.js"}
-    %title Codebreaker Web
+    = render('/partials/load_configs')
   %body
-    = @request.session[:name]
     %section#introduction
       .container
         .row.fill-viewport.align-items-center.justify-content-center
           .col-12.col-md-6
             .row
               .col-md-auto
-                %h1.text-white.title Codebreaker 2018
+                %h1.text-white.title
+                  = show_info(:codebreaker_title)
             %p.lead.text-white-70
-              Hello, test!
-              Try to guess 4-digit number, that consists of numbers in a range from 1 to 6.
+              = I18n.t(:hello, name: @request.session[:name])
+              = show_info(:try_to_guess_code)
             %hr.mb-4/
             .row
               .col.button
                 %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
-                  Level:
+                  = show_info(:level)
                   %span.badge.badge-light
-                    Simple
+                    = @request.session[:level]
               .col.text-center.button
                 %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
-                  Attempts:
+                  = show_info(:attempts)
                   %span.badge.badge-light 4
               .col.button
                 %button.btn.btn-primary.float-right{:type => "button"}
-                  Hints:
+                  = show_info(:hints)
                   %span.badge.badge-light 1
             %hr.mb-4/
             %form{:action => "http://localhost:9292/submit_answer", :method => "post"}

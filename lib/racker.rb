@@ -1,4 +1,4 @@
-require 'haml'
+require_relative '../autoload'
 
 class Racker
   def call(env)
@@ -8,15 +8,13 @@ class Racker
 
   def response(env)
     case @request.path
-    when '/' then Rack::Response.new(render('menu'))
-    when '/registration'
-        @request.session {||}
-       .redirect('game')
-    when '/game' then Rack::Response.new(render('game'))
-    when '/statistics' then Rack::Response.new(render('statistics'))
-    when '/win' then Rack::Response.new(render('win'))
-    when '/lose' then Rack::Response.new(render('lose'))
-    else Rack::Response.new('Not Found', 404)
+    when '/' then menu
+    when '/ragistration' then registration
+    when '/game' then game
+    when '/statistics' then show_statistics
+    when '/win' then win
+    when '/lose' then lose
+    else not_found
     end
   end
 
@@ -25,7 +23,49 @@ class Racker
     Haml::Engine.new(File.read(path)).render(binding)
   end
 
-  # def word
-  #   @request.cookies['word'] || 'Nothing'
-  # end
+  def registration
+    @request.session[:name] = @request.params['player_name']
+    @request.session[:level] = @request.params['level']
+    Rack::Response.new { |response| response.redirect('/game') }
+  end
+
+  def game
+    return Rack::Response.new(render('game')) if session_present?
+    Rack::Response.new { |response| response.redirect('/') }
+  end
+
+  def menu
+    return Rack::Response.new(render('menu')) unless session_present?
+    Rack::Response.new { |response| response.redirect('/game') }
+  end
+
+  def show_statistics
+    Rack::Response.new(render('statistics'))
+  end
+
+  def lose
+    clear_session
+    Rack::Response.new(render('lose'))
+  end
+
+  def win
+    clear_session
+    Rack::Response.new(render('win'))
+  end
+
+  def not_found
+    Rack::Response.new('Not Found', 404)
+  end
+
+  def show_info(message)
+    I18n.t(message)
+  end
+
+  def clear_session
+    @request.session.clear
+  end
+
+   def session_present?
+     @request.session.key?(:name)
+   end
 end

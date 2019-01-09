@@ -1,14 +1,7 @@
 !!!
 %html.mdl-js{:lang => "en"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
-    %link{:href => "assets/favicon.ico", :rel => "icon"}/
-    %link{:href => "assets/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "assets/css/styles.css", :rel => "stylesheet"}/
-    %script{:src => "assets/js/jquery.min.js"}
-    %script{:src => "assets/js/bootstrap.min.js"}
-    %title Codebreaker Web
+    = render('/partials/load_configs')
   %body
     %section#introduction
       .container
@@ -16,8 +9,10 @@
           .col-12.col-md-6
             .row
               .col-md-auto
-                %h1.text-white.title Codebreaker 2018
-            %p.lead.text-white-70 Top of Players:
+                %h1.text-white.title
+                  = show_info(:codebreaker_title)
+            %p.lead.text-white-70
+              = show_info(:top_players)
             %hr.mb-4/
             .table-responsive-md.scores
               %table.table.table-striped.table.table-sm
