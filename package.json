@@ -1,0 +1,12 @@
+{
+  "name": "codebreaker-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rostikkkk2/codebreaker-web.git",
+  "author": "rostikkkk2 <rost4402255@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1"
+  }
+}
