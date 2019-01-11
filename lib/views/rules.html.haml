@@ -1,0 +1,17 @@
+!!!
+%html.mdl-js{:lang => "en"}
+  %head
+    = render('/partials/load_configs')
+  %body
+    %section#introduction
+      .container
+        .row.fill-viewport.align-items-center.justify-content-center
+          .col-12.col-md-6
+            .row
+              .col-md-auto
+                %h1.text-white.title.inline-block
+                  = show_info(:codebreaker_title)
+                %p
+                  = show_info(:game_rules)
+                %a.btn.btn-primary.btn-lg{:href => "/", :role => "button"}
+                  = show_info(:btn_home)

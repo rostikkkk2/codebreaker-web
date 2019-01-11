@@ -18,3 +18,29 @@ en:
   hints: "Hints:"
   hints_left: "Hints Left:"
   lose: Oops, You lose the game!
+  btn_home: Home
+  not_found_page: "404 <br> Not found page"
+  game_rules: "<br> Codebreaker is a logic game in which a code-breaker tries to break a secret code created by a code-maker.<br>
+        The codemaker, which will be played by the application we’re going to write,<br>
+        creates a secret code of four numbers between 1 and 6.<br>
+        The codebreaker gets some number of chances to break the code (depends on chosen difficulty).<br>
+        In each turn, the codebreaker makes a guess of 4 numbers.<br>
+        The codemaker then marks the guess with up to 4 signs -  or - or empty spaces.  <br>
+        A  indicates an exact match: one of the numbers in the guess is the same as one of the numbers,<br>
+        in the secret code and in the same position.<br>
+        For example: <br>
+        Secret number - 1234<br>
+        Input number - 6264 <br>
+        Number of pluses - 2 (second and fourth position)<br>
+        A - indicates a number match:  <br>
+        one of the numbers in the guess is the same as one of the numbers,<br>
+        in the secret code but in a different position.<br>
+        For example:<br>
+        Secret number - 1234<br>
+        Input number - 6462<br>
+        Number of minuses - 2 (second and fourth position)<br>
+        An empty space indicates that there is not a current digit in a secret number.<br>
+        If codebreaker inputs the exact number as a secret number<br>
+        - codebreaker wins the game. If all attempts are spent - codebreaker loses.<br>
+        Codebreaker also has some number of hints(depends on chosen difficulty).<br>
+        If a user takes a hint - he receives back a separate digit of the secret code.<br> "

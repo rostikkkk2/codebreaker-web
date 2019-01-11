@@ -19,6 +19,11 @@ input::-webkit-inner-spin-button {
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }
 
+.not_found_page {
+  margin: auto;
+  font-size: 75px;
+}
+
 #lang_menu {
   margin: 6px 0 6px 0;
 }
@@ -44,6 +49,7 @@ input::-webkit-inner-spin-button {
 .guess_input {
   font-size: 72px;
   text-align: center;
+  padding: 42px 0;
 }
 
 .guess_markers_list {

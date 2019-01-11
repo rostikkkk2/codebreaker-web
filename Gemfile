@@ -4,8 +4,8 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem 'codebreaker_rostik'
 gem 'rack'
+gem 'codebreaker_rostik'
 gem 'i18n'
 
 group :development do

@@ -42,9 +42,17 @@
               %hr.mb-4/
               %button.btn.btn-primary.btn-lg{:type => "submit"}
                 Submit
-              %a.btn.btn-warning.btn-lg.float-right{:role => "button"}
+            - if @request.session[:hints_left] != @request.session[:hints_total]
+              %a.btn.btn-warning.btn-lg.float-right{:role => "button", :href => '/show_hint'}
                 Show hint!
                 %span.badge.badge-light
-                  6
+                  - if @request.session[:hints_left]
+                    - a = @request.session[:hints_left]
+                    - a.times do |index|
+                      = @request.session[:secret_code_hints][index]
+            - else
+              %a.btn.disabled.btn-warning.btn-lg.float-right{:role => "button", :href => '/show_hint'}
+                Show hint!
                 %span.badge.badge-light
-                  3
+                  -# = @request.session[:hint]
+                  -# = @request.session[:hint]
