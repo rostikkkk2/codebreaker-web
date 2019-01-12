@@ -21,38 +21,20 @@
                     %th{:scope => "col"} #
                     %th{:scope => "col"} Name
                     %th{:scope => "col"} Level
-                    %th{:scope => "col"} Attempts Left
-                    %th{:scope => "col"} Hints Left
+                    %th{:scope => "col"} Attempts
+                    %th{:scope => "col"} Hints
                     %th{:scope => "col"} Date
                 %tbody
-                  %tr
-                    %th{:scope => "row"} 1
-                    %td Player 1
-                    %td Middle
-                    %td 8/10
-                    %td 3/3
-                    %td 2018.12.04 - 17:00:01
-                  %tr
-                    %th{:scope => "row"} 2
-                    %td Player 1
-                    %td Middle
-                    %td 8/10
-                    %td 3/3
-                    %td 2018.12.04 - 17:00:01
-                  %tr
-                    %th{:scope => "row"} 3
-                    %td Player 1
-                    %td Middle
-                    %td 8/10
-                    %td 3/3
-                    %td 2018.12.04 - 17:00:01
-                  %tr
-                    %th{:scope => "row"} 4
-                    %td Player 1
-                    %td Middle
-                    %td 8/10
-                    %td 3/3
-                    %td 2018.12.04 - 17:00:01
+                  - if CodebreakerRostik::Storage.new.file_exist?
+                    - data = CodebreakerRostik::Storage.new.load
+                    - data.each do |data_item|
+                      %tr
+                        %th= data.find_index(data_item) + 1
+                        %td= data_item[:name]
+                        %td= data_item[:level]
+                        %td= data_item[:attempts_left]
+                        %td= data_item[:hints_left]
+                        %td= data_item[:date]
             %hr.mb-4/
             %a.btn.btn-primary.btn-lg{:href => "/", :role => "button"}
               = show_info(:btn_home)

@@ -24,12 +24,20 @@ input::-webkit-inner-spin-button {
   font-size: 75px;
 }
 
+.btn_play_again {
+  float: left;
+}
+
 #lang_menu {
   margin: 6px 0 6px 0;
 }
 
 .fill-viewport {
   min-height: 100vh;
+}
+
+.d-ib {
+  display: inline-block;
 }
 
 .text-white-70 {

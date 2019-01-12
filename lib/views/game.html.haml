@@ -24,35 +24,52 @@
               .col.text-center.button
                 %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
                   = show_info(:attempts)
-                  %span.badge.badge-light 4
+                  - if @request.session[:attempts_left]
+                    = "#{@request.session[:attempts_left]} / #{@request.session[:attempts_total]}"
+                  - else
+                    = "0 / #{@request.session[:attempts_total]}"
               .col.button
-                %button.btn.btn-primary.float-right{:type => "button"}
+                %button.btn.btn-primary.float-right{:type => "button", :disabled => "disabled"}
                   = show_info(:hints)
-                  %span.badge.badge-light 1
+                  - if @request.session[:hints_left]
+                    = "#{@request.session[:hints_left]} / #{@request.session[:hints_total]}"
+                  - else
+                    = "0 / #{@request.session[:hints_total]}"
             %hr.mb-4/
-            %form{:action => "http://localhost:9292/submit_answer", :method => "post"}
+            %form{:action => "/play_game", :method => "post"}
               .form-group
-                %input.form-control.guess_input{:autocomplete => "off", :name => "number", :pattern => "^[1-6]{4}$", :placeholder => "1234", :required => ""}/
+                %input.form-control.guess_input{:autocomplete => "off", :name => "guess_code", :pattern => "^[1-6]{4}$", :autofocus => '', :placeholder => 'XXXX', :required => ""}/
               .form-group.guess_markers_list
                 #guess_marker
-                  %button.btn.btn-success.marks{:disabled => "disabled", :type => "button"} +
-                  %button.btn.btn-primary.marks{:disabled => "disabled", :type => "button"} -
-                  %button.btn.btn-danger.marks{:disabled => "disabled", :type => "button"} x
-                  %button.btn.btn-danger.marks{:disabled => "disabled", :type => "button"} x
+                  - if @request.session[:signs]
+                    - signs_arr = @request.session[:signs].split("")
+                    - signs_arr.each do |sign|
+                      - if signs_arr.length != 4
+                        - signs_arr.push('x')
+                    - signs_arr = ['x','x','x','x'] if signs_arr == []
+
+                    - signs_arr.each do |sign|
+                      - if sign == '+'
+                        %button.btn.btn-success.marks{:disabled => "disabled", :type => "button"} +
+                      - if sign == '-'
+                        %button.btn.btn-primary.marks{:disabled => "disabled", :type => "button"} -
+                      - if sign == 'x'
+                        %button.btn.btn-danger.marks{:disabled => "disabled", :type => "button"} x
               %hr.mb-4/
               %button.btn.btn-primary.btn-lg{:type => "submit"}
-                Submit
-            - if @request.session[:hints_left] != @request.session[:hints_total]
-              %a.btn.btn-warning.btn-lg.float-right{:role => "button", :href => '/show_hint'}
-                Show hint!
-                %span.badge.badge-light
-                  - if @request.session[:hints_left]
-                    - a = @request.session[:hints_left]
-                    - a.times do |index|
-                      = @request.session[:secret_code_hints][index]
-            - else
-              %a.btn.disabled.btn-warning.btn-lg.float-right{:role => "button", :href => '/show_hint'}
-                Show hint!
-                %span.badge.badge-light
-                  -# = @request.session[:hint]
-                  -# = @request.session[:hint]
+                = show_info(:submit)
+              - if @request.session[:hints_left] != @request.session[:hints_total]
+                %a.btn.btn-warning.btn-lg.float-right{:role => "button", :href => '/show_hint'}
+                  = show_info(:show_hint)
+                  %span.badge
+                    - if @request.session[:hints_left]
+                      - a = @request.session[:hints_left]
+                      - a.times do |index|
+                        = @request.session[:secret_code_hints][index]
+              - else
+                %a.btn.disabled.btn-warning.btn-lg.float-right{:role => "button", :href => '/show_hint'}
+                  = show_info(:show_hint)
+                  %span.badge
+                  - a = @request.session[:hints_left]
+                  - a.times do |index|
+                    = @request.session[:secret_code_hints][index]

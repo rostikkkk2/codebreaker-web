@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.0)
-    codebreaker_rostik (0.5.0)
+    codebreaker_rostik (0.5.1)
     coderay (1.1.2)
     colorize (0.8.1)
     concurrent-ruby (1.1.4)
@@ -92,4 +92,4 @@ DEPENDENCIES
   simplecov
 
 BUNDLED WITH
-   1.17.1
+   1.16.2

@@ -12,13 +12,20 @@ en:
   start_the_game: Start the game!
   title_rules: Rules
   title_statistics: Statistics
+  the_code_was: The code was
   hello: Hello, %{name}!
   level: "Level:"
+  statistics_is_clear: Statistics is clear
   attempts: "Attempts:"
+  submit: Submit
+  show_hint: Show hint!
   hints: "Hints:"
   hints_left: "Hints Left:"
+  attempts_left: "Attempts Left:"
+  btn_play_again: Play again!
   lose: Oops, You lose the game!
   btn_home: Home
+  user_win: Congratulations, %{name}! You won the game!
   not_found_page: "404 <br> Not found page"
   game_rules: "<br> Codebreaker is a logic game in which a code-breaker tries to break a secret code created by a code-maker.<br>
         The codemaker, which will be played by the application we’re going to write,<br>
