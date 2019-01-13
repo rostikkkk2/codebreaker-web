@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Codebreaker
   include CodebreakerHelpers
 
@@ -11,7 +13,7 @@ class Codebreaker
   end
 
   def response
-    @game = CodebreakerGame.new(@request)
+    @game ||= CodebreakerGame.new(@request)
     case @request.path
     when URLS[:home] then menu
     when URLS[:rules] then show_rules
@@ -34,6 +36,8 @@ class Codebreaker
   end
 
   def set_difficulty
+    return redirect(URLS[:home]) unless @request.session[:name]
+
     difficulties = CodebreakerRostik::Difficulty::DIFFICULTIES[@request.params['level'].to_sym]
     @request.session[:hints_total] ||= difficulties[:hints_total]
     @request.session[:attempts_total] ||= difficulties[:attempts_total]
@@ -41,12 +45,14 @@ class Codebreaker
 
   def show_rules
     return render_page(RENDERS[:rules]) unless session_present?
+
     redirect(URLS[:game])
   end
 
   def menu
     clear_session_if_game_over
     return render_page(RENDERS[:menu]) unless session_present?
+
     redirect(URLS[:game])
   end
 
@@ -54,11 +60,11 @@ class Codebreaker
     if !session_present? || @request.session[:game_over_lose] || @request.session[:game_over_win]
       return render_page(RENDERS[:statistics])
     end
+
     redirect(URLS[:game])
   end
 
   def not_found
     render_page(NOT_FOUND_PAGE)
   end
-
 end

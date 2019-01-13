@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require_relative 'autoload'
-require './lib/codebreaker'
 
 use Rack::Reloader
 use Rack::Static, urls: ['/assets', '/node_modules'], root: './'

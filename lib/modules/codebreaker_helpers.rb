@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CodebreakerHelpers
   URLS = {
     home: '/',
@@ -9,7 +11,7 @@ module CodebreakerHelpers
     win: '/win',
     lose: '/lose',
     play_game: '/play_game'
-  }
+  }.freeze
   RENDERS = {
     menu: 'menu',
     rules: 'rules',
@@ -17,7 +19,7 @@ module CodebreakerHelpers
     statistics: 'statistics',
     win: 'win',
     lose: 'lose'
-  }
+  }.freeze
   NOT_FOUND_PAGE = 'not_found_page'
 
   def render(template)
@@ -45,7 +47,7 @@ module CodebreakerHelpers
     @request.session.clear
   end
 
-   def session_present?
-     @request.session.key?(:name)
-   end
+  def session_present?
+    @request.session.key?(:name)
+  end
 end

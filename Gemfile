@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem 'rack'
 gem 'codebreaker_rostik'
-gem 'i18n'
 gem 'html2haml'
+gem 'i18n'
+gem 'rack'
 
 group :development do
   gem 'fasterer'
