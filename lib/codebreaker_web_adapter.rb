@@ -1,13 +1,12 @@
 # frozen_string_literal: true
-
-class CodebreakerGame
+class CodebreakerWebAdapter
   include CodebreakerHelpers
 
   def initialize(request)
     @request = request
   end
 
-  def game
+  def play
     clear_session_if_game_over
     return render_page(RENDERS[:game]) if session_present?
 
@@ -29,7 +28,7 @@ class CodebreakerGame
   end
 
   def win
-    return redirect(URLS[:home]) unless @request.session[:game_over_win]
+                return redirect(URLS[:home]) unless @request.session[:game_over_win]
 
     CodebreakerStorage.new(@request).save
     render_page(RENDERS[:win])

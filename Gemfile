@@ -8,6 +8,9 @@ gem 'codebreaker_rostik'
 gem 'html2haml'
 gem 'i18n'
 gem 'rack'
+gem 'capybara'
+gem 'rack_session_access'
+gem 'poltergeist'
 
 group :development do
   gem 'fasterer'
