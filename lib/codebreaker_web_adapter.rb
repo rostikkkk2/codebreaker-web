@@ -19,14 +19,14 @@ class CodebreakerWebAdapter
   end
 
   def check_win_with_lose
-    return check_lose if @request.session[:game].secret_code.join != @request.params['guess_code']
+    return check_lose unless @request.session[:game].secret_code.join == @request.params['guess_code']
 
     @request.session[:game_over_win] = true
     redirect(URLS[:win])
   end
 
   def win
-                return redirect(URLS[:home]) unless @request.session[:game_over_win]
+    return redirect(URLS[:home]) unless @request.session[:game_over_win]
 
     CodebreakerStorage.new(@request).save
     render_page(RENDERS[:win])
@@ -55,7 +55,7 @@ class CodebreakerWebAdapter
 
   def check_lose
     increment_attempts
-    return redirect(URLS[:game]) if @request.session[:game].attempts_left != @request.session[:attempts_total]
+    return redirect(URLS[:game]) unless @request.session[:game].attempts_left == @request.session[:attempts_total]
 
     @request.session[:game_over_lose] = true
     redirect(URLS[:lose])

@@ -3,19 +3,6 @@ require 'spec_helper'
 describe CodebreakerWebAdapter do
   let(:app) { Rack::Builder.parse_file('config.ru').first }
 
-  describe "when welcome" do
-    before do
-      visit '/'
-    end
-
-    scenario 'returns the status 200' do
-      expect(status_code).to be(200)
-    end
-    scenario "home page" do
-      expect(page).to have_content I18n.t(:codebreaker_title)
-    end
-  end
-
   let(:game) { CodebreakerRostik::Game.new }
   let(:user_name) { 'Rostik' }
   let(:test_difficulty) { CodebreakerRostik::Difficulty::DIFFICULTIES[:easy][:difficulty].downcase }
@@ -69,8 +56,8 @@ describe CodebreakerWebAdapter do
     let(:response) { post '/show_hint' }
     let(:response_registration) do
       post '/registration',
-           player_name: user_name,
-           level: test_difficulty
+      player_name: user_name,
+      level: test_difficulty
     end
 
     describe 'show hint' do
@@ -92,8 +79,8 @@ describe CodebreakerWebAdapter do
     let(:path_to_test_db) { './lib/db/db.yaml' }
     let(:response_registration) do
       post '/registration',
-           player_name: user_name,
-           level: test_difficulty
+      player_name: user_name,
+      level: test_difficulty
     end
     let(:response) { post '/play_game', guess_code: valid_code }
 
@@ -119,8 +106,8 @@ describe CodebreakerWebAdapter do
     let(:invalid_code) { '2222' }
     let(:response_registration) do
       post '/registration',
-           player_name: user_name,
-           level: test_difficulty
+      player_name: user_name,
+      level: test_difficulty
     end
     let(:response) { post '/play_game', guess_code: invalid_code }
 
