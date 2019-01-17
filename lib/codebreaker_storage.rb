@@ -10,8 +10,8 @@ class CodebreakerStorage
     user = {
       name: @request.session[:name],
       level: @request.session[:level],
-      attempts_left: "#{@request.session[:attempts_left] || 0} / #{@request.session[:attempts_total]}",
-      hints_left: "#{@request.session[:hints_left] || 0} / #{@request.session[:hints_total]}",
+      attempts_left: "#{@request.session[:game].attempts_left} / #{@request.session[:attempts_total]}",
+      hints_left: "#{@request.session[:game].hints_left} / #{@request.session[:hints_total]}",
       date: Time.now
     }
     @storage.add_data_to_db(user)

@@ -5,14 +5,14 @@
       = @request.session[:level]
   %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
     = show_info(:attempts_left)
-    - if @request.session[:attempts_left]
-      = "#{@request.session[:attempts_left]} / #{@request.session[:attempts_total]}"
+    - if @request.session[:game].attempts_left
+      = "#{@request.session[:game].attempts_left} / #{@request.session[:attempts_total]}"
     - else
       = "0 / #{@request.session[:attempts_total]}"
   %button.btn.btn-primary{:disabled => "disabled", :type => "button"}
     = show_info(:hints_left)
-    - if @request.session[:hints_left]
-      = "#{@request.session[:hints_left]} / #{@request.session[:hints_total]}"
+    - if @request.session[:game].hints_left
+      = "#{@request.session[:game].hints_left} / #{@request.session[:hints_total]}"
     - else
       = "0 / #{@request.session[:hints_total]}"
 %hr.mb-4/
